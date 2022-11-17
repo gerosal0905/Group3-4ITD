@@ -1,21 +1,35 @@
 import requests
 
-## single ip request
-# response = requests.get("http://ip-api.com/json/24.48.0.1").json()
-#
-# print(response['lat'])
-# print(response['lon'])
+def my_function():
+  val = input("Enter your value: ")
 
-# batch ip request
+  response = requests.get("http://ip-api.com/json/" + val).json() ##49.145.77.165
 
-response = requests.post("http://ip-api.com/batch", json=[
-  {"query": "208.80.152.201"},
-  {"query": "167.71.3.52"},
-  {"query": "206.189.198.234"},
-  {"query": "157.230.75.212"}
-]).json()
+  print("Country: " + response['country'])
+  print("Country Code: " + response['countryCode'])
+  print("Region: " + response['region'])
+  print("Region Name: " + response['regionName'])
+  print("City: " + response['city'])
+  print("Zip Code: " + response['zip'])
+  print("Timezone: " + response['timezone'])
+  print("ISP: " + response['isp'])
+  print("Company: " + response['org'])
+  print("ASP: " + response['as'])
+  print("Latitude: " + str(response['lat']))
+  print("Longitude: " + str(response['lon']))
 
-for ip_info in response:
-    for k,v in ip_info.items():
-        print(k,v)
-    print("\n")
+user_input = ''
+my_function()
+
+while True:
+    user_input = input('Do you want to continue? yes/no: ')
+
+    if user_input.lower() == 'yes':
+        my_function()
+        continue
+    elif user_input.lower() == 'no':
+        print('Thank you for using our app!')
+        break
+    else:
+        print('Type yes/no')
+        
